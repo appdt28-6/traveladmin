@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $database="mastravel";
-$dbpass="toor";
+$dbpass="";
 $dbuser="root";
 /*$server="localhost";
 $database="mastrave_cm";
