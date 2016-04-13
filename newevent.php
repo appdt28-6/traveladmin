@@ -6,14 +6,16 @@
 		// keep track validation errors
 		$nameError = null;
 		$fechaError = null;
-		$ubicacionError = null;
 		$costoError = null;
+		$ubiError = null;
 		
 		// keep track post values
-		$name = $_POST['name'];
+		$name = $_POST['eventname'];
 		$fecha = $_POST['fecha'];
-		$ubicacion = $_POST['ubicacion'];
+		$ubi = $_POST['ubi'];
 		$costo = $_POST['costo'];
+		$estado=$_POST['estado'];
+		$nombrearchivo="imagen.png";
 		
 		// validate input
 		$valid = true;
@@ -21,19 +23,16 @@
 			$nameError = 'Please enter Name';
 			$valid = false;
 		}
-		$valid = true;
 		if (empty($fecha)) {
 			$fechaError = 'Please enter Fecha';
 			$valid = false;
 		}
-
-		$valid = true;
-		if (empty($ubicacionError)) {
-			$ubicacion = 'Please enter Locación';
+		
+		if (empty($ubi)) {
+			$ubiError = 'Please enter Ubicación';
 			$valid = false;
 		}
-		
-		
+
 		if (empty($costo)) {
 			$costoError = 'Please enter Costo';
 			$valid = false;
@@ -46,7 +45,7 @@ if ($_FILES['archivo']["error"] > 0)
 			  {
 			$error="Imagen subida con exito.";
 			  $nombrearchivo=$_FILES['archivo']['name'];
-			  move_uploaded_file($_FILES['archivo']['tmp_name'],"photoevent/" . $_FILES['archivo']['name']);
+			 move_uploaded_file($_FILES['archivo']['tmp_name'],"photoevent/" . $_FILES['archivo']['name']);
 			  }
 		
 		// insert data
@@ -55,9 +54,9 @@ if ($_FILES['archivo']["error"] > 0)
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO evento (nombre,fecha,direccion,estado,desde,photo) values(?,?,?,?,?,?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($name,$fecha,$ubicacion,$estado,$desde,$nombrearchivo));
+			$q->execute(array($name,$fecha,$ubi,$estado,$costo,$nombrearchivo));
 			Database::disconnect();
-			header("Location: evento.php");
+			header("Location: eventos.php");
 		}
 	}
 ?>
@@ -73,33 +72,7 @@ if ($_FILES['archivo']["error"] > 0)
 		<!-- Begin page -->
 		<div id="wrapper">
 
-            <!-- Top Bar Start -->
-            <div class="topbar">
-
-                <!-- LOGO -->
-                <div class="topbar-left">
-                    <div class="text-center">
-                        <a href="eventos.php" class="logo"><img src="assets/images/maslogo.png"></a>
-                    </div>
-                </div>
-
-                <!-- Button mobile view to collapse sidebar menu -->
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="container">
-                        <div class="">
-                            <div class="pull-left">
-                                <button class="button-menu-mobile open-left">
-                                    <i class="ion-navicon"></i>
-                                </button>
-                                <span class="clearfix"></span>
-                            </div>
-
-                            <?php include('perfil.php');?>
-                        </div>
-                        <!--/.nav-collapse -->
-                    </div>
-                </div>
-            </div>
+           
             <!-- Top Bar End -->
 			<?php include('menu.php');?>
 			<!-- ============================================================== -->
@@ -157,12 +130,12 @@ if ($_FILES['archivo']["error"] > 0)
 											      		<?php endif; ?>
 	                                                </div>
 	                                            </div>
-	                                             <div class="form-group" <?php echo !empty($ubicacionError)?'error':'';?>>
+	                                             <div class="form-group" <?php echo !empty($ubiError)?'error':'';?>>
 	                                                <label class="col-md-2 control-label" for="example-email">Lugar:</label>
 	                                                <div class="col-md-10">
-	                                                    <input type="text" id="ubicacion" name="ubicacion" class="form-control" placeholder="Hotel Plaza..." value="<?php echo !empty($ubicacion)?$ubicacion:'';?>">
-	                                                    <?php if (!empty($ubicacionError)): ?>
-											      		<span class="help-inline"><?php echo $ubicacionError;?></span>
+	                                                    <input type="text" id="ubi" name="ubi" class="form-control" placeholder="Hotel Plaza..." value="<?php echo !empty($ubi)?$ubi:'';?>">
+	                                                    <?php if (!empty($ubiError)): ?>
+											      		<span class="help-inline"><?php echo $ubiError;?></span>
 											      		<?php endif; ?>
 	                                                </div>
 	                                            </div>
@@ -215,7 +188,7 @@ if ($_FILES['archivo']["error"] > 0)
 											      		<?php endif; ?>
 	                                                </div>
 	                                            </div>
-                                                <?php echo $error;?> 
+                                                <?php //echo $error;?> 
 	                                             <div class="form-group">
 	                                                <label class="col-md-2 control-label">Imagen del evento</label>
 	                                                <div class="col-md-10">

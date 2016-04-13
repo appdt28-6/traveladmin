@@ -8,15 +8,14 @@
 		$costoError = null;
 		
 		// keep track post values
-		$desc = $_POST['ubicacion'];
+		$desc = $_POST['desc'];
 		$costo = $_POST['costo'];
-		$event=$_POST['event'];
 		
 		// validate input
-		
+		$valid = true;
 		
 		if (empty($desc)) {
-			$descError = 'Please enter Costo';
+			$descError = 'Please enter Descripción';
 			$valid = false;
 		}
 		
@@ -29,11 +28,11 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO habitaciones (id_evento,desc,costo) values(?,?,?)";
+			$sql = "INSERT INTO habitacion (id_evento,descr,costo) values(?,?,?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($event,$desc,$costo));
 			Database::disconnect();
-			header("Location: evento.php");
+			header("Location: hablist.php?event=$event");
 		}
 	}
 ?>
@@ -114,11 +113,11 @@
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="newhab.php?event=<?php echo $event;?>" method="post" role="form" enctype="multipart/form-data">                                    
+                        					<form class="form-horizontal" action="newhab.php?event=<?php echo $event;?>" method="post" role="form">                                    
 	                                            <div class="form-group" <?php echo !empty($descError)?'error':'';?>>
 	                                                <label class="col-md-2 control-label">Descripción:</label>
 	                                                <div class="col-md-10">
-	                                                    <input type="text" name="desc" class="form-control" placeholder="4 barras libres..." value="<?php echo !empty($desc)?$desc:'';?>">
+	                                                    <input type="text" name="desc" class="form-control" placeholder="Cuadruple..." value="<?php echo !empty($desc)?$desc:'';?>">
 	                                                    <?php if (!empty($descError)): ?>
 											      		<span class="help-inline"><?php echo $descError;?></span>
 											      		<?php endif; ?>

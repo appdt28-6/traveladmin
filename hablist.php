@@ -71,7 +71,7 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newhab.php">Agregar Habitación</a>
+                                 <a href="newhab.php?event=<?php echo $event;?>">Agregar Habitación</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
@@ -90,7 +90,7 @@
 											while($row = mysql_fetch_array($result))
 											{
 											echo " <tr>";
-											echo " <td>".utf8_encode($row['desc'])."</td>";
+											echo " <td>".utf8_encode($row['descr'])."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
                                             echo '<a class="btn btn-success" href="update.php?id='.$row['id_hab'].'">Update</a>';
