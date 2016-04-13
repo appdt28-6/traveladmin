@@ -51,17 +51,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Barras para <?php include ('eventoheader.php');?></h4>
-								<!--<ol class="breadcrumb">
-									<li>
-										<a href="#">Ubold</a>
-									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								<ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Barras Libres</a>
+                                    </li>
+                                    <li>
+                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                    </li>
+                                </ol>
 							</div>
 						</div>
 
@@ -71,7 +68,7 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newbarra.php">Agregar Barra</a>
+                                 <a href="newbarra.php?event=<?php echo $event;?>">Agregar Barra</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
@@ -90,7 +87,7 @@
 											while($row = mysql_fetch_array($result))
 											{
 											echo " <tr>";
-											echo " <td>".utf8_encode($row['desc'])."</td>";
+											echo " <td>".utf8_encode($row['descr'])."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
                                             echo '<a class="btn btn-success" href="update.php?id='.$row['id_barra'].'">editar</a>';

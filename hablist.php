@@ -51,17 +51,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Habitaciones para <?php include ('eventoheader.php');?></h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Habitaciones</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								</ol>
 							</div>
 						</div>
 
