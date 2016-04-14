@@ -1,3 +1,4 @@
+<?php $event=$_GET['event'];?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,18 +50,15 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de eventos</h4>
-								<!--<ol class="breadcrumb">
+								<h4 class="page-title">Información de eventos</h4>
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Congreso</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								</ol>
 							</div>
 						</div>
 
@@ -70,13 +68,12 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newevent.php">Agregar Evento</a>
+                                 <a href="newcongreso.php?event=<?php echo $event;?>">Datos de Congreso</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Nombre</th>
                                                     <th>Descripción</th>
                                                     <th>Costo</th>
                                                    <th>Acciones</th>
@@ -85,22 +82,20 @@
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM evento";
+											$query="SELECT * FROM congreso where id_evento='$event'";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
+                                                $op=($row['descr']==0)?"No hay congreso":"Si hay congreso";
 											echo " <tr>";
-											echo " <td>".$row['id_evento']."</td>";
-											echo " <td>".utf8_encode($row['nombre'])."</td>";
-											echo " <td>".$row['fecha']."</td>";
-											echo " <td>".utf8_encode($row['direccion'])."</td>";
-											echo '<td width=250>';
-                                            echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
+											echo " <td>".$row['id_congreso']."</td>";
+											echo " <td>".$op."</td>";
+											echo " <td>".$row['costo']."</td>";
+                                            echo " <td>";
+                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id_congreso'].'">Update</a>';
                                             echo '&nbsp;';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
-                                            echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
+                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_congreso'].'">Delete</a>';
                                             echo '</td>';
 											echo " </tr>";
 											}
