@@ -31,20 +31,14 @@
                                     <li><a href="pagos.php">Revisar Pagos</a></li>
                                 </ul>
                             </li>
-<!--
+
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="ti-spray"></i> <span> Icons </span> </a>
+                                <a href="#" class="waves-effect"><i class=" ti-bookmark-alt "></i> <span> Finanzas </span> </a>
                                 <ul class="list-unstyled">
-                                	<li><a href="icons-glyphicons.html">Glyphicons</a></li>
-                                    <li><a href="icons-materialdesign.html">Material Design</a></li>
-                                    <li><a href="icons-ionicons.html">Ion Icons</a></li>
-                                    <li><a href="icons-fontawesome.html">Font awesome</a></li>
-                                    <li><a href="icons-themifyicon.html">Themify Icons</a></li>
-                                    <li><a href="icons-simple-line.html">Simple line Icons</a></li>
-                                    <li><a href="icons-weather.html">Weather Icons</a></li>
+                                	<li><a href="finanzas.php">Programación</a></li>
                                 </ul>
                             </li>
-
+<!--
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="ti-pencil-alt"></i><span> Forms </span></a>
                                 <ul class="list-unstyled">

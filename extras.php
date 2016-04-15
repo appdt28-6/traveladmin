@@ -9,7 +9,7 @@
                                                     while($row = mysql_fetch_array($result))
                                                     {
                                                          
-                                                         echo '<option value='.$row['id_extra'].'>'.utf8_encode($row['desc'])." $".$row['costo'].'</option>';
+                                                         echo '<option value='.$row['id_extra'].'>'.utf8_encode($row['descr'])." $".$row['costo'].'</option>';
                                                          
                                                         
                                                     }

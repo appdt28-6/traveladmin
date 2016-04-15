@@ -3,16 +3,14 @@
                                                          <?php 
                                                                                 
                                                     include('connect.php');
-                                                    $query="SELECT * FROM habitacion where id_evento='$event'";
+                                                    $query="SELECT * FROM tpago where id_evento='$event'";
                                                     $link=mysql_connect($server,$dbuser,$dbpass);
                                                     $result=mysql_db_query($database,$query,$link);
                                                     while($row = mysql_fetch_array($result))
                                                     {
-                                                        if($row['costo']==0)
-                                                        {$no=" (No incrementa)";}
-                                                        else{$no=" (Incrementa $".$row['costo'];}
                                                          
-                                                         echo '<option value='.$row['id_hab'].'>'.utf8_encode($row['descr']).$no.')</option>';
+
+                                                         echo '<option value='.$row['t_pago'].'>'.$row['descr'].' $'.$row['costo'].'</option>';
                                                          
                                                     }
                                                              mysql_free_result($result);

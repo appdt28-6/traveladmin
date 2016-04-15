@@ -47,60 +47,69 @@
 					<div class="content">
 					<div class="container">
 
-						<!-- Page-Title -->
-						<div class="row">
-							<div class="col-sm-12">
-								<h4 class="page-title">Opciones para este evento</h4>
-								<!--<ol class="breadcrumb">
-									<li>
-										<a href="#">Ubold</a>
-									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
-							</div>
-						</div>
-
-                        
-
+                        <!-- Page-Title -->
                         <div class="row">
-
                             <div class="col-sm-12">
-                                <div class="card-box">
-                                    <div class="col-lg-6">
-                                            <h4 class="m-t-0 header-title"><b>Paquete de viaje</b></h4>
-                            </div>
-                                 <br>
-                                 <table>
-                                    <tr>
-                                        <td>Congreso:</td><td> <?php include ('congresos.php') ?></td><td><a href="conglist.php?event=<?php echo $event;?>"> Editar</a></td>
-                                                    
-                                    </tr>
-                                    <tr>
-                                        <td>Habitaciones:</td><td><?php include ('habitaciones.php') ?></td><td><a href="hablist.php?event=<?php echo $event;?>"> Editar</a></td>
-                                                    
-                                    </tr>
-                                    <tr>
-                                        <td>Barras:</td><td><?php include ('barras.php') ?></td><td><a href="barralist.php?event=<?php echo $event;?>"> Editar</a></td>
-                                                   
-                                    </tr>
-                                    <tr>
-                                        <td>Extras:</td> <td><?php include ('extras.php') ?></td><td><a href="extralist.php?event=<?php echo $event;?>"> Editar</a></td>
-                                                   
-                                    </tr>
-                                    <tr>
-                                        <td>Trasportes:</td> <td><?php include ('trasportes.php') ?></td><td><a href="opclist.php?event=<?php echo $event;?>"> Editar</a></td>
-                                    </tr>
-                                 </table>
-                                              
-                                </div>
+                                <h4 class="page-title">Listado de Habitaciones para <?php include ('eventoheader.php');?></h4>
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Configuración</a>
+                                    </li>
+                                    <li>
+                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
+  <div class="row">
+                       
+                            <div class="col-sm-12">
+                                <div class="card-box">
+                                 <form class="form-horizontal" role="form">                                    
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Congreso:</label>
+                                                    <div class="col-md-10">
+                                                       <?php include ('congresos.php') ?><a href="conglist.php?event=<?php echo $event;?>"> Editar</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label" for="example-email"> Habitaciones: </label>
+                                                    <div class="col-md-10">
+                                                      <?php include ('habitaciones.php') ?><a href="hablist.php?event=<?php echo $event;?>"> Editar</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">  Barras:</label>
+                                                    <div class="col-md-10">
+                                                         <?php include ('barras.php') ?><a href="barralist.php?event=<?php echo $event;?>"> Editar</a>
+                                                    </div>
+                                                </div>
 
+                                                 <div class="form-group">
+                                                    <label class="col-md-2 control-label"> Extras: </label>
+                                                    <div class="col-md-10">
+                                                         <?php include ('extras.php') ?><a href="extralist.php?event=<?php echo $event;?>"> Editar</a>
+                                                    </div>
+                                                </div>           
+                                                                         
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label"> Trasportes: </label>
+                                                    <div class="col-md-10">
+                                                         <?php include ('trasportes.php') ?><a href="opclist.php?event=<?php echo $event;?>"> Editar</a>   
+                                                    </div>
+                                                </div>                                                                        
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Numero de Pagos</label>
+                                                    <div class="col-md-10">
+                                                        <?php include ('numpagos.php') ?><a href="pagoslist.php?event=<?php echo $event;?>"> Editar</a>   
+                                                    </div>
+                                                </div>
+                              
+                                                
+                               
+                                            </form>
+                                </div>
+                            </div>
 
                     </div> <!-- container -->
                                
