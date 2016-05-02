@@ -70,7 +70,7 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newevent.php">Agregar Coordinador</a>
+                                 <a href="newcoord.php">Agregar Coordinador</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>

@@ -50,17 +50,11 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Clientes</h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="excel/clientes.php">Exportar a Excel</a>
 									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								</ol>
 							</div>
 						</div>
 
@@ -81,6 +75,7 @@
                                                     <th>Email</th>
                                                      <th>Estado</th>
                                                     <th>Detalles</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -99,7 +94,7 @@
 											echo " <td>".$row['cel']."</td>";
 											echo " <td>".$row['email']."</td>";
                                             echo " <td>".$row['estado']."</td>";
-                                            echo " <td><a href=perfil.php?idcliente=".$row['id_cliente'].">Ver Perfil</></td>";
+                                            echo " <td><a href=profile.php?idcliente=".$row['id_cliente'].">Ver Perfil</></td>";
 											echo " </tr>";
 											}
 											mysql_free_result($result);

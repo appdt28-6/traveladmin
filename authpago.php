@@ -12,13 +12,14 @@
 		// keep track post values
 		$id = $_POST['id'];
 		$status=1;
+		$pago=$_POST['pago'];
 		
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "UPDATE pagos  set status = ?  WHERE id_pago = ?";
+		$sql = "UPDATE pagos  set pago=? ,status = ?  WHERE id_pago = ?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($status,$id));
+		$q->execute(array($pago,$status,$id));
 		Database::disconnect();
 		header("Location: clientepagos.php?idc=$idc");
 		
@@ -101,6 +102,10 @@
 	    			<form class="form-horizontal" action="authpago.php?idc=<?php echo $idc;?>" method="post">
 	    			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
 					  <p class="alert alert-error">Estas apunto de autorizar este pago?</p>
+					  <div class="form-actions">
+					  		<label>Confirme la cantidad de pago:</label>
+						 <input type="text" name="pago" value=""/>
+						</div>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-danger">Si</button>
 						  <a class="btn" href="clientepagos.php?idc=<?php echo $idc;?>">No</a>

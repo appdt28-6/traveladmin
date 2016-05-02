@@ -1,4 +1,5 @@
 
+<?php setlocale(LC_MONETARY, 'es_MX'); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -95,28 +96,37 @@
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
+                                                $idc=$row['idc'];
                                                 $base=$row['base'];
-
                                                 if($band2==0){
-                                                    //no suma precio de congreso
-                                                    $total=$row['a']+$row['b']+$row['c']+$row['e'];
-                                                    }
-                                                    else
-                                                    {
-                                                    //suma precio de congreso
-                                                    $total=$row['a']+$row['b']+$row['c']+$row['d'];
-                                                    }
-                                                    $t=$total+$base;
-                                                    $pp=($t-500)/4;
-
+                                                //no suma precio de congreso
+                                                $total=$row['a']+$row['b']+$row['c']+$row['e'];
+                                                }
+                                                else
+                                                {
+                                                //suma precio de congreso
+                                                $total=$row['a']+$row['b']+$row['c']+$row['d'];
+                                                }
+                                                $t=$total+$base;
+                                                $pp=($t-500)/4;
+                                               
+                                                $query2="SELECT SUM(pago) as pagado from pagos where id_cliente='$idc' ";
+                                                $link=mysql_connect($server,$dbuser,$dbpass);
+                                                $result2=mysql_db_query($database,$query2,$link);
+                                                while($row2 = mysql_fetch_array($result2))
+                                                {
+                                                    $pagado=$row2['pagado'];
+                                                }
+                                                $restada=$t-$pagado;
+                                               
     											echo " <tr>";
-                                                echo " <td>".$row['idc']."</td>";
+                                                echo " <td>".$idc."</td>";
                                                 echo " <td>".$row['nombre']."</td>";
                                                 echo " <td>".$row['email']."</td>";
-    											echo " <td>".$t."</td>";
-                                                echo " <td>Cantidad pagada</td>";
-                                                 echo " <td>Cantidad Restada</td>";
-                                                echo " <td>".$pp."</td>";
+    											echo " <td>".money_format('%i', $t)."</td>";
+                                                echo " <td>".money_format('%i', $pagado)."</td>";
+                                                 echo " <td>".money_format('%i', $restada)."</td>";
+                                                echo " <td>".money_format('%i', round($pp/100.0,0)*100)."</td>";
     											echo " </tr>";
 											}
 											mysql_free_result($result);
