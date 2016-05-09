@@ -22,13 +22,8 @@ $Password ="@ppDT2016.";
 $IdConexion = mysql_connect($Servidor, $Usuario, $Password);
 mysql_select_db($NombreBD, $IdConexion);
 
-$sql = "SELECT Clientes.id_cliente as id ,Clientes.nombre as nombre,Clientes.ap as ap,Clientes.am as am ,Clientes.email as email,Clientes.tel as tel,Clientes.cel as cel,Clientes.gen as gen,Clientes.fn as fn,Clientes.edad as edad,Clientes.calle as calle,Clientes.numero as numero,Clientes.col as col,Clientes.mun as mun,Clientes.cp as cp,Clientes.estado as estado,
-                                            datos_medicos.t_sangre as t_sangre,datos_medicos.alergico as alergico,datos_medicos.enfermedad as enfermedad,datos_medicos.enfermedad as enfermedad,datos_medicos.hospital as hospital,datos_medicos.medicamentos as medicamentos,
-                                            datos_emergencia.contactname as contactname,datos_emergencia.contactap as contactap,datos_emergencia.contactam as contactam,datos_emergencia.contacttel as contacttel,datos_emergencia.contactcel as contactcel,datos_emergencia.contactmail as contactmail,
-                                            coordinador.nombre as coord , evento.nombre as event FROM Clientes inner join datos_medicos on Clientes.id_cliente=datos_medicos.id_cliente 
-                                            inner join datos_emergencia on Clientes.id_cliente=datos_emergencia.id_cliente 
-                                            inner join coordinador on Clientes.id_coord=coordinador.id_coord
-                                            inner join evento on Clientes.id_evento=evento.id_evento";
+$sql = "SELECT evento.desde as base,paquete.id_paquete as paq,evento.nombre as nombre,coordinador.nombre as coord,habitacion.costo as a,habitacion.descr as a2,barra.costo as b,barra.descr as b2 ,opcionespaquete.costo as c,opcionespaquete.descripcion as c2, extrapaq.descr as e2,extrapaq.costo as e FROM paquete inner join habitacion on paquete.id_hab=habitacion.id_hab inner join barra on paquete.id_barra=barra.id_barra inner join opcionespaquete on paquete.id_opcion=opcionespaquete.id_opcion inner join coordinador on paquete.id_coord=coordinador.id_coord inner join evento on paquete.id_evento=evento.id_evento inner join extrapaq on paquete.id_extra=extrapaq.id_extra where paquete.id_evento='$event' and paquete.id_cliente='$id' ";
+
 $result=mysql_query($sql,$IdConexion);
 ?>
 Datos del cliente
@@ -43,27 +38,14 @@ Datos del cliente
 <th>Coordinador</th>
 <th>Teléfono de Casa</th>
 <th>Celular <th>
-<th>Genero</th>
 <th>Fecha de Nacimiento</th>
-<th>Edad</th>
-<th>Tipo de Sangre</th>
-<th>¿Eres alergico a algo?</th>
-<th>¿Tienes alguna enfermedad/fractura/cirugía?</th>
-<th>¿Haz estado hospitalizado?</th>
-<th>Menciona medicamentos utilizados regularmente</th>
-<th>Nombre de Contacto:</th>
-<th>Apellido Paterno contacto:</th>
-<th>Apellido Materno contacto:</th>
-<th>Teléfono de contacto:</th>
-<th>Celular de contacto:</th>
-<th>Email contacto:</th>
-<th>Calle</th>
-<th>Número</th>
-<th>Colonia</th>
-<th>Municipio</th>
-<th>Codigo Postal</th>
-<th>Estado</th>
-<th>Contrato</th>
+<th>Costo de Paquete<th>
+<th>Tipo de Plan <th>
+<th>Tipo de Habitaciòn <th>	
+<th>No. de barras <th>		
+<th>Extras de viaje <th>
+<th>Precio de habitación<th>
+<th>Precio de barras <th>	
  </tr>
  </thead>
  <tbody>

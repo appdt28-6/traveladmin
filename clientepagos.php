@@ -64,24 +64,21 @@ mysql_close($link);
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Pagos de <?php echo $nombre; ?></h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Pagos</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="pagos.php">Regresar</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+									
+								</ol>
 							</div>
 						</div>
 
                         
 
                         <div class="row">
-                      <a href="pagos.php"><- Regresar</a>
                             <div class="col-sm-12">
                                 <div class="card-box">
                                  <br>
@@ -121,7 +118,7 @@ mysql_close($link);
 											echo " <td>".$row['suc']."</td>";
                                             echo " <td>".$row['folio']."</td>";
                                             echo " <td>".$row['fecha']."</td>";
-                                            echo " <td><a href=../comprobante/".$row['archivo']." target=\"_blank\">Ver comprobante</></td>";
+                                            echo " <td><a href=../mastravel/comprobante/".$row['archivo']." target=\"_blank\">Ver comprobante</></td>";
                                             if($row['status']==0){
                                                 echo " <td><a href=authpago.php?idc=".$idc."&&id=".$row['id_pago'].">Autorizar</></td>";
                                            

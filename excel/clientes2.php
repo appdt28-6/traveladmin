@@ -1,6 +1,6 @@
-<?php ob_start("ob_gzhandler"); ?>
  <?php
- date_default_timezone_set('mexico/general');
+//Exportar datos de php a Excel
+date_default_timezone_set('mexico/general');
 header("Content-Type: application/vnd.ms-excel");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -11,14 +11,14 @@ header("content-disposition: attachment;filename=clientes".date("d-m-y").".xls")
 </head>
 <body>
 <?php
-/*$NombreBD = "mastravel";
+$NombreBD = "mastravel";
 $Servidor = "localhost";
 $Usuario = "root";
-$Password ="toor";*/
-$NombreBD = "mastrave_cm";
+$Password ="toor";
+/*$NombreBD = "mastrave_cm";
 $Servidor = "localhost";
 $Usuario = "mastrave_root";
-$Password ="@ppDT2016.";
+$Password ="@ppDT2016.";*/
 $IdConexion = mysql_connect($Servidor, $Usuario, $Password);
 mysql_select_db($NombreBD, $IdConexion);
 
@@ -138,3 +138,4 @@ mysql_close($IdConexion); //Cierras la Conexión
 </table>
 </body>
 </html>
+<?php ob_end_flush();?>

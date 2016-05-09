@@ -1,4 +1,4 @@
-<? $event=$_GET['event']; ?>
+<?php $coord=$_GET['coord']; ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -50,18 +50,18 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Opciones de trasporte para <?php include ('eventoheader.php');?></h4>
-								<!--<ol class="breadcrumb">
+								<h4 class="page-title">Listado de Clientes por coordinador</h4>
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Coordinador</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="#">Clientes</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+									<li>
+                                        <a href="coord.php">Regresar</a>
+                                    </li>
+								</ol>
 							</div>
 						</div>
 
@@ -71,37 +71,44 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newopc.php?event=<?php echo $event;?>">Agregar Trasporte</a>
+                                
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Costo</th>
-                                                   <th>Acciones</th>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Edad</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Email</th>
+                                                     <th>Estado</th>
+                                                    <th>Detalles</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php
-											include('connect.php');
-											$query="SELECT * FROM opcionespaquete where id_evento='$event'";
-											$link=mysql_connect($server,$dbuser,$dbpass);
-											$result=mysql_db_query($database,$query,$link);
-											while($row = mysql_fetch_array($result))
-											{
-											echo " <tr>";
-											echo " <td>".utf8_encode($row['descripcion'])."</td>";
-											echo " <td>".$row['costo']."</td>";
-											echo '<td width=250>';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id_opcion'].'">editar</a>';
-                                            echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_opcion'].'">eliminar</a>';
-                                            echo '</td>';
-											echo " </tr>";
-											}
-											mysql_free_result($result);
-                                    	mysql_close($link);			
-											?>
+                                            include('connect.php');
+                                            $query="SELECT * FROM Clientes where id_coord='$coord'";
+                                            $link=mysql_connect($server,$dbuser,$dbpass);
+                                            $result=mysql_db_query($database,$query,$link);
+                                            while($row = mysql_fetch_array($result))
+                                            {
+                                                //if 1 Queretaro sino pachuca
+                                            echo " <tr>";
+                                            echo " <td>".$row['id_cliente']."</td>";
+                                            echo " <td>".utf8_encode($row['nombre']." ".$row['ap']." ".$row['am']." ")."</td>";
+                                            echo " <td>".$row['edad']."</td>";
+                                            echo " <td>".$row['cel']."</td>";
+                                            echo " <td>".$row['email']."</td>";
+                                            echo " <td>".$row['estado']."</td>";
+                                            echo " <td><a href=profile.php?idcliente=".$row['id_cliente'].">Ver Perfil</></td>";
+                                            echo " </tr>";
+                                            }
+                                            mysql_free_result($result);
+                                        mysql_close($link);         
+                                            ?>
+                                         
                                          
                                                
                                             </tbody>

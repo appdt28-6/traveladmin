@@ -52,17 +52,11 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Finanzas Programadas</h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="excel/paquetes.php">Exportar a Excel</a>
 									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								</ol>
 							</div>
 						</div>
 

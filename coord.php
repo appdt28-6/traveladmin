@@ -50,17 +50,12 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Coordinadores</h4>
-								<!--<ol class="breadcrumb">
-									<li>
-										<a href="#">Ubold</a>
-									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								<ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Coordinador</a>
+                                    </li>
+                                    
+                                </ol>
 							</div>
 						</div>
 
@@ -98,7 +93,7 @@
 											echo " <td>".$row['telefono']."</td>";
 											echo " <td>".$row['email']."</td>";
 											echo " <td>".$row['area']."</td>";
-                                            echo " <td><a href=detailcoord.php?idcoord=".$row['id_coord'].">Clientes</></td>";
+                                            echo " <td><a href=detailcoord.php?coord=".$row['id_coord'].">Clientes</></td>";
 											echo " </tr>";
 											}
 											mysql_free_result($result);
