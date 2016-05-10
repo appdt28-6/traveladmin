@@ -86,13 +86,14 @@
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
+												$area=($row['area']==1)?"Hidalgo":"Queretaro";
                                                 //if 1 Queretaro sino pachuca
 											echo " <tr>";
 											echo " <td>".$row['id_coord']."</td>";
 											echo " <td>".utf8_encode($row['nombre'])."</td>";
 											echo " <td>".$row['telefono']."</td>";
 											echo " <td>".$row['email']."</td>";
-											echo " <td>".$row['area']."</td>";
+											echo " <td>".$area."</td>";
                                             echo " <td><a href=detailcoord.php?coord=".$row['id_coord'].">Clientes</></td>";
 											echo " </tr>";
 											}

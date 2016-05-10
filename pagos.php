@@ -49,7 +49,7 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Clientes</h4>
+								<h4 class="page-title">Listado de Clientes que han realizado pagos</h4>
 								<!--<ol class="breadcrumb">
 									<li>
 										<a href="#">Ubold</a>
@@ -76,7 +76,6 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Nombre</th>
-                                                    <th>Edad</th>
                                                     <th>Teléfono</th>
                                                     <th>Email</th>
                                                      <th>Estado</th>
@@ -86,7 +85,7 @@
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM Clientes";
+											$query="SELECT Clientes.id_cliente as id_cliente,Clientes.nombre as nombre,Clientes.ap as ap,Clientes.am as am,Clientes.cel as cel ,Clientes.email as email,Clientes.estado as estado FROM pagos inner join Clientes on pagos.id_cliente=Clientes.id_cliente inner join tpago on pagos.t_pago=tpago.t_pago where pagos.id_evento=2 group by Clientes.id_cliente";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
@@ -94,8 +93,7 @@
                                                 //if 1 Queretaro sino pachuca
 											echo " <tr>";
 											echo " <td>".$row['id_cliente']."</td>";
-											echo " <td>".utf8_encode($row['nombre']." ".$row['ap']." ".$row['am']." ")."</td>";
-											echo " <td>".$row['edad']."</td>";
+											echo " <td>".$row['nombre']." ".$row['ap']." ".$row['am']."</td>";
 											echo " <td>".$row['cel']."</td>";
 											echo " <td>".$row['email']."</td>";
                                             echo " <td>".$row['estado']."</td>";

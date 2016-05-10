@@ -87,7 +87,7 @@
                                                 //if 1 Queretaro sino pachuca
 											echo " <tr>";
 											echo " <td>".$row['id_cliente']."</td>";
-											echo " <td>".utf8_encode($row['nombre']." ".$row['ap']." ".$row['am']." ")."</td>";
+											echo " <td>".$row['nombre']." ".$row['ap']." ".$row['am']."</td>";
 											echo " <td>".$row['edad']."</td>";
 											echo " <td>".$row['cel']."</td>";
 											echo " <td>".$row['email']."</td>";

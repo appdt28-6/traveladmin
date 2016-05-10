@@ -56,7 +56,7 @@
                                         <a href="#">Configuración</a>
                                     </li>
                                     <li>
-                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                        <a href="eventos.php">Regresar</a>
                                     </li>
                                 </ol>
                             </div>
