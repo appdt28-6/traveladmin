@@ -1,4 +1,5 @@
 <?php $idc=$_GET['idc'];
+
 include('connect.php');
 $query="SELECT * FROM Clientes where id_cliente='$idc'";
 $link=mysql_connect($server,$dbuser,$dbpass);
@@ -6,7 +7,7 @@ $result=mysql_db_query($database,$query,$link);
 while($row = mysql_fetch_array($result))
 {
 
-$nombre=utf8_encode($row['nombre']." ".$row['ap']." ".$row['am']." ")."</td>";
+$nombre=$row['nombre']." ".$row['ap']." ".$row['am']."</td>";
                                                                                       
 }
 mysql_free_result($result);
@@ -92,6 +93,7 @@ mysql_close($link);
                                                     <th>Sucursal</th>
                                                      <th>Folio</th>
                                                     <th>Fecha</th>
+                                                    <th>Pago</th>
                                                     <th>Comprobante</th>
                                                     <th>Acciones</th>
                                                 </tr>
@@ -99,25 +101,28 @@ mysql_close($link);
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM pagos where id_cliente='$idc'";
+											setlocale(LC_MONETARY, 'es_MX');
+											$query="SELECT pagos.id_pago as id_pago,tpago.descr as tpago, pagos.id_evento as id_evento,pagos.id_paquete as id_paquete, pagos.suc as suc,pagos.folio as folio,pagos.fecha as fecha, pagos.pago as pago, pagos.archivo as archivo FROM pagos inner join tpago on pagos.t_pago=tpago.t_pago where pagos.id_cliente='$idc'";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
                                             
-                                                if ($row['t_pago']==1){$tpago="Pago 1 (21/Abr/2016)";}
+                                                /*if ($row['t_pago']==1){$tpago="Pago 1 (21/Abr/2016)";}
                                                 if ($row['t_pago']==2){$tpago="Pago 2 (05/May/2016)";}
                                                 if ($row['t_pago']==3){$tpago="Pago 3 (19/May/2016)";}
-                                                if ($row['t_pago']==4){$tpago="Resto (10/Jun/2016)";}
+                                                if ($row['t_pago']==4){$tpago="Resto (10/Jun/2016)";}*/
 
 											echo " <tr>";
 											echo " <td>".$row['id_pago']."</td>";
-											echo " <td>".$tpago."</td>";
+											echo " <td>".$row['tpago']."</td>";
 											echo " <td>".$row['id_evento']."</td>";
 											echo " <td>".$row['id_paquete']."</td>";
 											echo " <td>".$row['suc']."</td>";
                                             echo " <td>".$row['folio']."</td>";
                                             echo " <td>".$row['fecha']."</td>";
+                                            echo " <td>".money_format('%i', $row['pago'])."</td>";
+                                           // echo "<td>$".money_format('%i', $row['pago'])."</td>";
                                             echo " <td><a href=../mastravel/comprobante/".$row['archivo']." target=\"_blank\">Ver comprobante</></td>";
                                             if($row['status']==0){
                                                 echo " <td><a href=authpago.php?idc=".$idc."&&id=".$row['id_pago'].">Autorizar</></td>";

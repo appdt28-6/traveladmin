@@ -12,7 +12,7 @@
                                                         {$no=" (No incrementa)";}
                                                         else{$no=" (Incrementa $".$row['costo'];}
                                                          
-                                                         echo '<option value='.$row['id_hab'].'>'.utf8_encode($row['descr']).$no.')</option>';
+                                                         echo '<option value='.$row['id_hab'].'>'.$row['descr'].$no.')</option>';
                                                          
                                                     }
                                                              mysql_free_result($result);

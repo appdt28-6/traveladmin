@@ -87,12 +87,12 @@
 											while($row = mysql_fetch_array($result))
 											{
 											echo " <tr>";
-											echo " <td>".utf8_encode($row['descr'])."</td>";
+											echo " <td>".$row['descr']."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id_hab'].'">Update</a>';
+                                            echo '<a class="btn btn-success" href="edithab.php?hab='.$row['id_hab'].'&&event='.$event.' ">Editar</a>';
                                             echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_hab'].'">Delete</a>';
+                                            echo '<a class="btn btn-danger" href="deletehab.php?hab='.$row['id_hab'].'&&event='.$event.' ">Eliminar</a>';
                                             echo '</td>';
 											echo " </tr>";
 											}

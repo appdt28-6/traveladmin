@@ -68,9 +68,9 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newhab.php?event=<?php echo $event;?>">Agregar Opciòn de Pago</a>
+                                 <a href="newpago.php?event=<?php echo $event;?>">Agregar Opciòn de Pago</a>
                                  <br>
-                                    <table id="datatable" class="table table-striped table-bordered">
+                                   <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Descripción</th>
@@ -90,9 +90,9 @@
 											echo " <td>".utf8_encode($row['descr'])."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['t_pago'].'">Update</a>';
+                                           echo '<a class="btn btn-success" href="editpagos.php?barra='.$row['t_pago'].'&&event='.$event.' ">Editar</a>';
                                             echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['t_pago'].'">Delete</a>';
+                                            echo '<a class="btn btn-danger" href="deletepagos.php?barra='.$row['t_pago'].'&&event='.$event.' ">Eliminar</a>';
                                             echo '</td>';
 											echo " </tr>";
 											}

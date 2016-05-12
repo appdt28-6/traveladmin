@@ -90,17 +90,15 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Opciones de Trasporte</h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Trasporte</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="opclist.php?event=<?php echo $event;?>">Regresar</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+									
+								</ol>
 							</div>
 						</div>
 

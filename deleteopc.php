@@ -1,4 +1,29 @@
-<?php $event=$_GET['event']; ?>
+<?php 
+	$event=$_GET['event'];
+	
+	require 'database.php';
+	$hab = 0;
+	
+	if ( !empty($_GET['hab'])) {
+		$hab = $_REQUEST['hab'];
+	}
+	
+	if ( !empty($_POST)) {
+		// keep track post values
+		$hab = $_POST['hab'];
+		
+		// delete data
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "DELETE FROM habitacion  WHERE id_hab = ? and id_evento =?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($hab,$event));
+		Database::disconnect();
+		header("Location: opclist.php?event=$event");		
+		
+	} 
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -50,61 +75,41 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Barras para <?php include ('eventoheader.php');?></h4>
+								<h4 class="page-title">Listado de trasportes para <?php include ('eventoheader.php');?></h4>
 								<ol class="breadcrumb">
                                     <li>
-                                        <a href="#">Barras Libres</a>
+                                        <a href="#">Trasporte</a>
                                     </li>
                                     <li>
-                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                        <a href="extralist.php?event=<?php echo $event;?>">Regresar</a>
                                     </li>
                                 </ol>
 							</div>
 						</div>
 
-                        
-
                         <div class="row">
-                       
-                            <div class="col-sm-12">
-                                <div class="card-box">
-                                 <a href="newbarra.php?event=<?php echo $event;?>">Agregar Barra</a>
-                                 <br>
-                                    <table id="datatable" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Costo</th>
-                                                   <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-											include('connect.php');
-											$query="SELECT * FROM barra where id_evento='$event'";
-											$link=mysql_connect($server,$dbuser,$dbpass);
-											$result=mysql_db_query($database,$query,$link);
-											while($row = mysql_fetch_array($result))
-											{
-											echo " <tr>";
-											echo " <td>".utf8_encode($row['descr'])."</td>";
-											echo " <td>".$row['costo']."</td>";
-											echo '<td width=250>';
-                                           echo '<a class="btn btn-success" href="editbarra.php?barra='.$row['id_barra'].'&&event='.$event.' ">Editar</a>';
-                                            echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="deletebarra.php?barra='.$row['id_barra'].'&&event='.$event.' ">Eliminar</a>';
-                                            echo '</td>';
-											echo " </tr>";
-											}
-											mysql_free_result($result);
-                                    	mysql_close($link);			
-											?>
-                                         
-                                               
-                                            </tbody>
-                                        </table>
-                                </div>
-                            </div>
+                        	<div class="col-sm-12">
+                        		<div class="card-box">
+                        			<h4 class="m-t-0 header-title"><b>Opciones de trasporte</b></h4>
+                        			<!--<p class="text-muted m-b-30 font-13">
+										Most common form control, text-based input fields. Includes support for all HTML5 types: <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>, <code>search</code>, <code>tel</code>, and <code>color</code>.
+									</p>-->
+									<br>
+                        			<div class="row">
+                        				<div class="col-md-6">
+                        					<form class="form-horizontal" action="deleteopc.php" method="post">
+	    			  <input type="hidden" name="hab" value="<?php echo $hab;?>"/>
+					  <p class="alert alert-error">Desea eliminar esta opción de habitación?</p>
+					  <div class="form-actions">
+						  <button type="submit" class="btn btn-danger">Si</button>
+						  <a class="btn" href="extralist.php?event=<?php echo $event;?>">No</a>
+						</div>
+					</form>                        				</div>
+                        				                     				
+                        				
+                        			</div>
+                        		</div>
+                        	</div>
                         </div>
 
 

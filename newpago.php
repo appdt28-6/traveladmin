@@ -1,6 +1,5 @@
 <?php 
 	$event=$_GET['event'];
-	
 	require 'database.php';
 
 	if ( !empty($_POST)) {
@@ -10,30 +9,32 @@
 		
 		// keep track post values
 		$desc = $_POST['desc'];
-		$costo = $_POST['costo'];
-				
-		// validate input
+		//$costo = $_POST['costo'];
+		$costo = "0";
+
 		
+		// validate input
+		$valid = true;
 		
 		if (empty($desc)) {
-			$descError = 'Please enter Descripcion';
+			$descError = 'Please enter Descripción';
 			$valid = false;
 		}
 		
-		if (empty($costo)) {
+		/*if (empty($costo)) {
 			$costoError = 'Please enter Costo';
 			$valid = false;
-		}
+		}*/
 		
 		// insert data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO extrapaq (id_evento,descr,costo) values(?,?,?)";
+			$sql = "INSERT INTO tpago (id_evento,descr,costo) values(?,?,?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($event,$desc,$costo));
 			Database::disconnect();
-			header("Location: extralist.php?event=$event");
+			header("Location: pagoslist.php?event=$event");
 		}
 	}
 ?>
@@ -89,43 +90,46 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Opciones extras para el viaje</h4>
-								<ol class="breadcrumb">
+								<h4 class="page-title">Listado de Pagos</h4> para <?php include ('eventoheader.php');?></h4>
+								<!--<ol class="breadcrumb">
 									<li>
-										<a href="#">Extras</a>
+										<a href="#">Ubold</a>
 									</li>
 									<li>
-										<a href="extralist.php?event=<?php echo $event;?>">Regresar</a>
+										<a href="#">Tables</a>
 									</li>
-									
-								</ol>
+									<li class="active">
+										Datatable
+									</li>
+								</ol>-->
 							</div>
 						</div>
 
                         <div class="row">
                         	<div class="col-sm-12">
                         		<div class="card-box">
-                        			<h4 class="m-t-0 header-title"><b>Agregar opciones extras</b></h4>
+                        			<h4 class="m-t-0 header-title"><b>Agregar opciones de pago</b></h4>
                         			<!--<p class="text-muted m-b-30 font-13">
 										Most common form control, text-based input fields. Includes support for all HTML5 types: <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>, <code>search</code>, <code>tel</code>, and <code>color</code>.
 									</p>-->
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="newextra.php?event=<?php echo $event;?>" method="post" role="form">                                    
+                        					<form class="form-horizontal" action="newpago.php?event=<?php echo $event;?>" method="post" role="form">                                    
 	                                            <div class="form-group" <?php echo !empty($descError)?'error':'';?>>
 	                                                <label class="col-md-2 control-label">Descripción:</label>
 	                                                <div class="col-md-10">
-	                                                    <input type="text" name="desc" class="form-control" placeholder="" value="<?php echo !empty($desc)?$desc:'';?>">
+	                                                    <input type="text" name="desc" class="form-control" placeholder="Pago 1 (21-abr-16)" value="<?php echo !empty($desc)?$desc:'';?>">
 	                                                    <?php if (!empty($descError)): ?>
 											      		<span class="help-inline"><?php echo $descError;?></span>
 											      		<?php endif; ?>
 	                                                </div>
 	                                            </div>
-	                                            <div class="form-group" <?php echo !empty($costoError)?'error':'';?> >
-	                                                <label class="col-md-2 control-label" for="example-email">Costo:</label>
+	                                            <br>
+	                                            <div class="form-group" <?php echo !empty($costoError)?'error':'';?>>
+	                                                <label class="col-md-2 control-label">Costo:</label>
 	                                                <div class="col-md-10">
-	                                                    <input type="text" id="costo" name="costo" class="form-control" placeholder="450" value="<?php echo !empty($costo)?$costo:'';?>">
+	                                                    <input type="text" id="costo" name="costo" class="form-control" placeholder="0" value="<?php echo !empty($costo)?$costo:'';?>" readonly>
 	                                                    <?php if (!empty($costoError)): ?>
 											      		<span class="help-inline"><?php echo $costoError;?></span>
 											      	<?php endif; ?>

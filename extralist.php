@@ -50,18 +50,16 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Barras para <?php include ('eventoheader.php');?></h4>
-								<!--<ol class="breadcrumb">
-									<li>
-										<a href="#">Ubold</a>
-									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								<h4 class="page-title">Listado de Extras para <?php include ('eventoheader.php');?></h4>
+								<ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Extras</a>
+                                    </li>
+                                    <li>
+                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                    </li>
+                                </ol>
+
 							</div>
 						</div>
 
@@ -71,7 +69,7 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newbarra.php">Agregar Barra</a>
+                                 <a href="newextra.php?event=<?php echo $event;?>">Agregar Extra</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
@@ -90,12 +88,12 @@
 											while($row = mysql_fetch_array($result))
 											{
 											echo " <tr>";
-											echo " <td>".utf8_encode($row['desc'])."</td>";
+											echo " <td>".utf8_encode($row['descr'])."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id_extra'].'">editar</a>';
+                                            echo '<a class="btn btn-success" href="editextra.php?ext='.$row['id_extra'].'&&event='.$event.' ">Editar</a>';
                                             echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_extra'].'">eliminar</a>';
+                                            echo '<a class="btn btn-danger" href="deleteextra.php?ext='.$row['id_extra'].'&&event='.$event.' ">Eliminar</a>';
                                             echo '</td>';
 											echo " </tr>";
 											}

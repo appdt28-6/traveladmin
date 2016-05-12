@@ -51,17 +51,15 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Listado de Opciones de trasporte para <?php include ('eventoheader.php');?></h4>
-								<!--<ol class="breadcrumb">
-									<li>
-										<a href="#">Ubold</a>
-									</li>
-									<li>
-										<a href="#">Tables</a>
-									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								<ol class="breadcrumb">
+                                    <li>
+                                        <a href="#">Transporte</a>
+                                    </li>
+                                    <li>
+                                        <a href="detailevent.php?event=<?php echo $event;?>">Regresar</a>
+                                    </li>
+                                </ol>
+
 							</div>
 						</div>
 
@@ -93,9 +91,9 @@
 											echo " <td>".utf8_encode($row['descripcion'])."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
-                                            echo '<a class="btn btn-success" href="update.php?id='.$row['id_opcion'].'">editar</a>';
+                                           echo '<a class="btn btn-success" href="editopc.php?hab='.$row['id_opcion'].'&&event='.$event.' ">Editar</a>';
                                             echo '&nbsp;';
-                                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_opcion'].'">eliminar</a>';
+                                            echo '<a class="btn btn-danger" href="deleteopc.php?hab='.$row['id_opcion'].'&&event='.$event.' ">Eliminar</a>';
                                             echo '</td>';
 											echo " </tr>";
 											}
