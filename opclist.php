@@ -88,7 +88,7 @@
 											while($row = mysql_fetch_array($result))
 											{
 											echo " <tr>";
-											echo " <td>".utf8_encode($row['descripcion'])."</td>";
+											echo " <td>".$row['descripcion']."</td>";
 											echo " <td>".$row['costo']."</td>";
 											echo '<td width=250>';
                                            echo '<a class="btn btn-success" href="editopc.php?hab='.$row['id_opcion'].'&&event='.$event.' ">Editar</a>';

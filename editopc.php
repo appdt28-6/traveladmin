@@ -119,7 +119,7 @@
                                         <a href="#">Trasportes</a>
                                     </li>
                                     <li>
-                                        <a href="extralist.php?event=<?php echo $event;?>">Regresar</a>
+                                        <a href="opclist.php?event=<?php echo $event;?>">Regresar</a>
                                     </li>
                                 </ol>
 							</div>

@@ -1,6 +1,5 @@
 <?php 
 	$event=$_GET['event'];
-	
 	require 'database.php';
 
 	if ( !empty($_POST)) {
@@ -11,12 +10,12 @@
 		// keep track post values
 		$desc = $_POST['desc'];
 		$costo = $_POST['costo'];
-				
-		// validate input
 		
+		// validate input
+		$valid = true;
 		
 		if (empty($desc)) {
-			$descError = 'Please enter Descripcion';
+			$descError = 'Please enter Descripción';
 			$valid = false;
 		}
 		
@@ -89,7 +88,7 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Opciones extras para el viaje</h4>
+								<h4 class="page-title">Opciones extras</h4>
 								<ol class="breadcrumb">
 									<li>
 										<a href="#">Extras</a>
@@ -97,8 +96,7 @@
 									<li>
 										<a href="extralist.php?event=<?php echo $event;?>">Regresar</a>
 									</li>
-									
-								</ol>
+																	</ol>
 							</div>
 						</div>
 
@@ -116,14 +114,15 @@
 	                                            <div class="form-group" <?php echo !empty($descError)?'error':'';?>>
 	                                                <label class="col-md-2 control-label">Descripción:</label>
 	                                                <div class="col-md-10">
-	                                                    <input type="text" name="desc" class="form-control" placeholder="" value="<?php echo !empty($desc)?$desc:'';?>">
+	                                                    <input type="text" name="desc" class="form-control" placeholder="Cuadruple..." value="<?php echo !empty($desc)?$desc:'';?>">
 	                                                    <?php if (!empty($descError)): ?>
 											      		<span class="help-inline"><?php echo $descError;?></span>
 											      		<?php endif; ?>
 	                                                </div>
 	                                            </div>
-	                                            <div class="form-group" <?php echo !empty($costoError)?'error':'';?> >
-	                                                <label class="col-md-2 control-label" for="example-email">Costo:</label>
+	                                            <br>
+	                                            <div class="form-group" <?php echo !empty($costoError)?'error':'';?>>
+	                                                <label class="col-md-2 control-label">Costo:</label>
 	                                                <div class="col-md-10">
 	                                                    <input type="text" id="costo" name="costo" class="form-control" placeholder="450" value="<?php echo !empty($costo)?$costo:'';?>">
 	                                                    <?php if (!empty($costoError)): ?>

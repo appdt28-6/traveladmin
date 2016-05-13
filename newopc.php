@@ -9,7 +9,7 @@
 		
 		// keep track post values
 		$desc = $_POST['desc'];
-		$costo = $_POST['costo'];
+		$costo = ($_POST['costo']==0)?"0":$_POST['costo'];
 		$num=1;
 		
 		// validate input
