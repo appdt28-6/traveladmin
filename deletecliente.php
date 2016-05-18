@@ -2,24 +2,24 @@
 	$event=$_GET['event'];
 	
 	require 'database.php';
-	$ext = 0;
+	$id = 0;
 	
-	if ( !empty($_GET['ext'])) {
-		$ext = $_REQUEST['ext'];
+	if ( !empty($_GET['id'])) {
+		$id = $_REQUEST['id'];
 	}
 	
 	if ( !empty($_POST)) {
 		// keep track post values
-		$ext = $_POST['ext'];
+		$id = $_POST['id'];
 		
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM extrapaq  WHERE id_extra= ? and id_evento =?";
+		$sql = "DELETE FROM Clientes  WHERE id_cliente = ?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($ext,$event));
+		$q->execute(array($id));
 		Database::disconnect();
-		header("Location: extralist.php?event=".$event." ");		
+		header("Location: clientes.php");
 		
 	} 
 ?>
@@ -75,13 +75,13 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Extras para <?php include ('eventoheader.php');?></h4><?php echo $event;?>
+								<h4 class="page-title">Listado de Clientes para <?php include ('eventoheader.php');?></h4>
 								<ol class="breadcrumb">
                                     <li>
-                                        <a href="#">Extras</a>
+                                        <a href="#">Borrar Cliente</a>
                                     </li>
                                     <li>
-                                        <a href="extralist.php?event=<?php echo $event;?>">Regresar</a>
+                                        <a href="customerevent.php.php?event=<?php echo $event;?>">Regresar</a>
                                     </li>
                                 </ol>
 							</div>
@@ -90,19 +90,19 @@
                         <div class="row">
                         	<div class="col-sm-12">
                         		<div class="card-box">
-                        			<h4 class="m-t-0 header-title"><b>Opciones extras de viaje</b></h4>
+                        			<h4 class="m-t-0 header-title"><b>Eliminar Cliente</b></h4>
                         			<!--<p class="text-muted m-b-30 font-13">
 										Most common form control, text-based input fields. Includes support for all HTML5 types: <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>, <code>search</code>, <code>tel</code>, and <code>color</code>.
 									</p>-->
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="deleteextra.php?event=<?php echo $event;?>" method="post">
-	    			  <input type="hidden" name="ext" value="<?php echo $ext;?>"/>
-					  <p class="alert alert-error">Desea eliminar esta opción extra de viaje?</p>
+                        					<form class="form-horizontal" action="deletecliente.php" method="post">
+	    			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
+					  <p class="alert alert-error">Desea eliminar esta opción de barra libre?</p>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-danger">Si</button>
-						  <a class="btn" href="extralist.php?event=<?php echo $event;?>">No</a>
+						  <a class="btn" href="barralist.php?event=<?php echo $event;?>">No</a>
 						</div>
 					</form>                        				</div>
                         				                     				

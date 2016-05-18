@@ -1,3 +1,4 @@
+<?php $event=$_GET['event'];?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,61 +50,61 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de eventos</h4>
-								<!--<ol class="breadcrumb">
+								<h4 class="page-title">Listado de Clientes</h4>
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="eventos.php">Regresar</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="excel/clientes.php">Exportar a Excel</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+								</ol>
 							</div>
 						</div>
-
-                        
 
                         <div class="row">
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newevent.php">Agregar Evento</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Nombre</th>
-                                                    <th>Fecha</th>
-                                                    <th>Sede</th>
-                                                    <th>Estado</th>
-                                                   <th>Desde</th>
-                                                   <th>Detalles</th>
-                                                   <th>Clientes</th>
+                                                    <th>Edad</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Email</th>
+                                                     <th>Estado</th>
+                                                    <th>Detalles</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM evento";
+											$query="SELECT * FROM Clientes where id_evento='$event'";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
+                                                //if 1 Queretaro sino pachuca
 											echo " <tr>";
-											echo " <td>".$row['id_evento']."</td>";
-											echo " <td>".utf8_encode($row['nombre'])."</td>";
-											echo " <td>".$row['fecha']."</td>";
-											echo " <td>".utf8_encode($row['direccion'])."</td>";
-											echo " <td>".$row['estado']."</td>";
-											echo " <td>".$row['desde']."</td>";
-                                            echo " <td><a href=detailevent.php?event=".$row['id_evento'].">Detalles</></td>";
-                                            echo " <td><a href=customerevent.php?event=".$row['id_evento'].">Inscritos</></td>";
+											echo " <td>".$row['id_cliente']."</td>";
+											echo " <td>".$row['nombre']." ".$row['ap']." ".$row['am']."</td>";
+											echo " <td>".$row['edad']."</td>";
+											echo " <td>".$row['cel']."</td>";
+											echo " <td>".$row['email']."</td>";
+                                            echo " <td>".$row['estado']."</td>";
+                                            echo '<td width=250>';
+							    echo '<a href="profile.php?idcliente='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-info"> <i class="ti-id-badge "></i> </button></a>';
+							   	echo '&nbsp;';
+							   //	echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
+							   //	echo '&nbsp;';
+							   	echo '<a href="deletecliente.php?id='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-danger"> <i class="fa fa-remove"></i> </button></a>';
+							   	echo '</td>';
 
-											echo " </tr>";
+                                           											echo " </tr>";
 											}
 											mysql_free_result($result);
                                     	mysql_close($link);			

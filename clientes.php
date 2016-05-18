@@ -92,7 +92,14 @@
 											echo " <td>".$row['cel']."</td>";
 											echo " <td>".$row['email']."</td>";
                                             echo " <td>".$row['estado']."</td>";
-                                            echo " <td><a href=profile.php?idcliente=".$row['id_cliente'].">Ver Perfil</></td>";
+                                           echo '<td width=250>';
+							    echo '<a href="profile.php?idcliente='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-info"> <i class="ti-id-badge "></i> </button></a>';
+							   	echo '&nbsp;';
+							   //	echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
+							   //	echo '&nbsp;';
+							   	echo '<a href="deletecliente.php?id='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-danger"> <i class="fa fa-remove"></i> </button></a>';
+							   	echo '</td>';
+
 											echo " </tr>";
 											}
 											mysql_free_result($result);

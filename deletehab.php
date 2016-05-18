@@ -97,7 +97,7 @@
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="deletehab.php" method="post">
+                        					<form class="form-horizontal" action="deletehab.php?event=<?php echo $event;?>" method="post">
 	    			  <input type="hidden" name="hab" value="<?php echo $hab;?>"/>
 					  <p class="alert alert-error">Desea eliminar esta opción de habitación?</p>
 					  <div class="form-actions">

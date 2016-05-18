@@ -97,7 +97,7 @@
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="deletepagos.php" method="post">
+                        					<form class="form-horizontal" action="deletepagos.php?event=<?php echo $event;?>" method="post">
 	    			  <input type="hidden" name="barra" value="<?php echo $barra;?>"/>
 					  <p class="alert alert-error">Desea eliminar esta opción de pago?</p>
 					  <div class="form-actions">
