@@ -111,6 +111,51 @@
                                 </div>
                             </div>
                             
+                            <div class="row">
+                       
+                            <div class="col-sm-12">
+                                <div class="card-box">
+                                 <form class="form-horizontal" role="form">                                    
+                                                <div class="form-group">
+                                                    Coordinadores para este evento:
+                                                    
+                                                </div>
+                                                <div class="form-group">
+                                                    
+                                                    <table id="datatable" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cordinadores asignados</th>
+                                                    <th>Clientes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+											include('connect.php');
+											$query="SELECT coordinador.id_coord as id_coord ,coordinador.nombre as coord FROM event_coord inner join coordinador on event_coord.id_coord=coordinador.id_coord where event_coord.id_evento='$event'";
+											$link=mysql_connect($server,$dbuser,$dbpass);
+											$result=mysql_db_query($database,$query,$link);
+											while($row = mysql_fetch_array($result))
+											{
+											echo " <tr>";
+											echo " <td>".utf8_encode($row['coord'])."</td>";
+											echo " <td><a href=detailcoord.php?coord=".$row['id_coord'].">Clientes</></td>";
+											echo " </tr>";
+											}
+											mysql_free_result($result);
+                                    	mysql_close($link);			
+											?>
+                                         
+                                               
+                                            </tbody>
+                                        </table>
+                                                </div>
+                                                                               
+                                            </form>
+                                </div>
+                            </div>
+
+                            
                          
                     	</div> <!-- container -->
                                
