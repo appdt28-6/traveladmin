@@ -1,3 +1,17 @@
+<?php 
+	$coord=$_GET['coord'];
+	include('connect.php');
+	$query="SELECT * from coordinador where id_coord='$coord'";
+	$link=mysql_connect($server,$dbuser,$dbpass);
+	$result=mysql_db_query($database,$query,$link);
+	while($row = mysql_fetch_array($result))
+	{
+		$nombre=$row['nombre'];
+	}
+	mysql_free_result($result);
+mysql_close($link);		
+	
+	?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,10 +63,13 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Coordinadores</h4>
+								<h4 class="page-title">Eventos asignados para</h4> <?php echo $nombre;?>
 								<ol class="breadcrumb">
                                     <li>
-                                        <a href="#">Coordinador</a>
+                                        <a href="#">Eventos Asignados</a>
+                                    </li>
+                                     <li>
+                                        <a href="coord.php">Regresar</a>
                                     </li>
                                     
                                 </ol>
@@ -65,38 +82,24 @@
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                 <a href="newcoord.php">Agregar Coordinador</a>
+                                 <a href="asignevent.php?coord=<?php echo $coord; ?>">Asignar otro evento</a>
                                  <br>
                                     <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Teléfono</th>
-                                                    <th>Email</th>
-                                                    <th>Area</th>
-                                                    <th>Detalles</th>
-                                                    <th>Asginado</th>
+                                                    <th>Eventos asignados</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM coordinador";
+											$query="SELECT evento.nombre as evento FROM event_coord inner join evento on event_coord.id_evento=evento.id_evento where event_coord.id_coord='$coord'";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
 											{
-												$area=($row['area']==1)?"Hidalgo":"Queretaro";
-                                                //if 1 Queretaro sino pachuca
 											echo " <tr>";
-											echo " <td>".$row['id_coord']."</td>";
-											echo " <td>".utf8_encode($row['nombre'])."</td>";
-											echo " <td>".$row['telefono']."</td>";
-											echo " <td>".$row['email']."</td>";
-											echo " <td>".$area."</td>";
-                                            echo " <td><a href=detailcoord.php?coord=".$row['id_coord'].">Clientes</></td>";
-                                            echo " <td><a href=coordasigned.php?coord=".$row['id_coord'].">Eventos</></td>";
+											echo " <td>".utf8_encode($row['evento'])."</td>";
 											echo " </tr>";
 											}
 											mysql_free_result($result);

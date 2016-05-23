@@ -50,7 +50,7 @@
                         <!-- Page-Title -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="page-title">Listado de Habitaciones para <?php include ('eventoheader.php');?></h4>
+                                <h4 class="page-title">Configuraciones para <?php include ('eventoheader.php');?></h4>
                                 <ol class="breadcrumb">
                                     <li>
                                         <a href="#">Configuración</a>
@@ -61,7 +61,7 @@
                                 </ol>
                             </div>
                         </div>
-  <div class="row">
+						<div class="row">
                        
                             <div class="col-sm-12">
                                 <div class="card-box">
@@ -110,10 +110,11 @@
                                             </form>
                                 </div>
                             </div>
-
-                    </div> <!-- container -->
+                            
+                         
+                    	</div> <!-- container -->
                                
-                </div> <!-- content -->
+                	</div> <!-- content -->
 
                 <footer class="footer">
                     2016 © AppDT.

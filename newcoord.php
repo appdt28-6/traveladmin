@@ -1,7 +1,18 @@
 <?php 
 	
 	require 'database.php';
-
+	include('connect.php');
+											$query="SELECT MAX(id_coord) as id FROM coordinador";
+											$link=mysql_connect($server,$dbuser,$dbpass);
+											$result=mysql_db_query($database,$query,$link);
+											while($row = mysql_fetch_array($result))
+											{
+												$coord=$row['id']+1;
+											}
+											mysql_free_result($result);
+                                    	mysql_close($link);		
+	
+	
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$nameError = null;
@@ -18,6 +29,7 @@
 		$user = $_POST['user'];
 		$pass=$_POST['pass'];
 		$area=$_POST['area'];
+		$evento=$_POST['evento'];
 		
 		// validate input
 		$valid = true;
@@ -54,6 +66,14 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$telefono,$email,$user,$pass,$area));
 			Database::disconnect();
+			///////////////////////
+			$pdo = Database::connect();
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "INSERT INTO event_coord (id_evento,id_coord) values(?,?)";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($evento,$coord));
+			Database::disconnect();
+
 			header("Location: coord.php");
 		}
 	}
@@ -69,8 +89,33 @@
 
 		<!-- Begin page -->
 		<div id="wrapper">
+			<!-- Top Bar Start -->
+            <div class="topbar">
 
-           
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="eventos.php" class="logo"><img src="assets/images/maslogo.png"></a>
+                    </div>
+                </div>
+
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+                            <div class="pull-left">
+                                <button class="button-menu-mobile open-left">
+                                    <i class="ion-navicon"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+
+                            <?php include('perfil.php');?>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
             <!-- Top Bar End -->
 			<?php include('menu.php');?>
 			<!-- ============================================================== -->
@@ -85,17 +130,15 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<h4 class="page-title">Registrar Coordinador</h4>
-								<!--<ol class="breadcrumb">
+								<ol class="breadcrumb">
 									<li>
-										<a href="#">Ubold</a>
+										<a href="#">Coordinador</a>
 									</li>
 									<li>
-										<a href="#">Tables</a>
+										<a href="coord.php">Regresar</a>
 									</li>
-									<li class="active">
-										Datatable
-									</li>
-								</ol>-->
+									
+								</ol>
 							</div>
 						</div>
 
@@ -200,6 +243,27 @@
 							                        <option value="Veracruz">Veracruz</option>
 							                        <option value="Yucatán">Yucatán</option>
 							                        <option value="Zacatecas">Zacatecas</option>-->
+							                    		</select>
+	                                                </div>
+	                                            </div>
+	                                            
+	                                               
+	                                            <div class="form-group">
+	                                                <label class="col-md-2 control-label">Evento:</label>
+	                                                <div class="col-md-10">
+		                                                <select name="evento" class="form-control mySelectBoxClass">
+		                                                <?php 
+		                                                include('connect.php');
+														$query="SELECT * FROM evento";
+														$link=mysql_connect($server,$dbuser,$dbpass);
+														$result=mysql_db_query($database,$query,$link);
+														while($row = mysql_fetch_array($result))
+														{
+																echo "<option value=".$row['id_evento'].">".utf8_encode($row['nombre'])." </option>";										
+														}
+														mysql_free_result($result);
+														mysql_close($link);	
+														?>
 							                    		</select>
 	                                                </div>
 	                                            </div>
