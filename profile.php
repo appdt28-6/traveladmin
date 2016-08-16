@@ -23,10 +23,21 @@ $estado=$row['estado'];
 $cel=$row['cel'];
 $tel=$row['tel'];
 $email=$row['email'];
+$coord=$row['id_coord'];
 }
 mysql_free_result($result);
 mysql_close($link); 
 /////
+$query="SELECT * FROM coordinador where id_coord='$coord'";
+$link=mysql_connect($server,$dbuser,$dbpass);
+$result=mysql_db_query($database,$query,$link);
+while($row = mysql_fetch_array($result))
+{
+$nombre=$row['nombre'];
+}
+mysql_free_result($result);
+mysql_close($link); 
+
        
 ?>
 <!DOCTYPE html>
@@ -80,10 +91,10 @@ mysql_close($link);
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Perfil</h4>
+								<h4 class="page-title">Perfil</h4> Coordinador:<?php echo $nombre;?> 
 								<ol class="breadcrumb">
 									<li>
-										<a href="clientes.php">Regresar</a>
+										<a href="customerevent.php?event=<?php echo $event;?>">Regresar</a>
 									</li>
                                     <li>
                                        <input type="button" value="Print this page" onclick="printPage()" />

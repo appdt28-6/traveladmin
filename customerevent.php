@@ -1,4 +1,17 @@
-<?php $event=$_GET['event'];?>
+<?php $event=$_GET['event'];
+	
+include('connect.php');	
+	/////
+$query="SELECT * FROM evento where id_evento='$event'";
+$link=mysql_connect($server,$dbuser,$dbpass);
+$result=mysql_db_query($database,$query,$link);
+while($row = mysql_fetch_array($result))
+{
+$nombre=$row['nombre'];
+}
+mysql_free_result($result);
+mysql_close($link); 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -50,8 +63,8 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Clientes</h4>
-								<ol class="breadcrumb">
+								<h4 class="page-title">Listado de Clientes -<?php echo utf8_encode($nombre); ?> </h4> 
+																<ol class="breadcrumb">
 									<li>
 										<a href="eventos.php">Regresar</a>
 									</li>
@@ -67,7 +80,9 @@
                             <div class="col-sm-12">
                                 <div class="card-box">
                                  <br>
-                                    <table id="datatable" class="table table-striped table-bordered">
+                                    <!--<table id="datatable" class="table table-striped table-bordered">-->
+                                     <table id="datatable" class="table table-striped table-bordered">
+
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -76,6 +91,7 @@
                                                     <th>Teléfono</th>
                                                     <th>Email</th>
                                                      <th>Estado</th>
+                                                      <th>Coord.</th>
                                                     <th>Detalles</th>
                                                    
                                                 </tr>
@@ -83,7 +99,7 @@
                                             <tbody>
                                             <?php
 											include('connect.php');
-											$query="SELECT * FROM Clientes where id_evento='$event'";
+											$query="SELECT Clientes.id_cliente as id_cliente,Clientes.nombre as nombre,Clientes.ap as ap,Clientes.am as am, Clientes.edad as edad,Clientes.cel as cel,Clientes.email as email,Clientes.estado as estado, coordinador.nombre as coord FROM Clientes inner join coordinador on Clientes.id_coord=coordinador.id_coord where Clientes.id_evento='$event'";
 											$link=mysql_connect($server,$dbuser,$dbpass);
 											$result=mysql_db_query($database,$query,$link);
 											while($row = mysql_fetch_array($result))
@@ -96,12 +112,13 @@
 											echo " <td>".$row['cel']."</td>";
 											echo " <td>".$row['email']."</td>";
                                             echo " <td>".$row['estado']."</td>";
+                                             echo " <td>".$row['coord']."</td>";
                                             echo '<td width=250>';
-							    echo '<a href="profile.php?idcliente='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-info"> <i class="ti-id-badge "></i> </button></a>';
+							    echo '<a href="profile.php?event='.$event.'&&idcliente='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-info"> <i class="ti-id-badge "></i> </button></a>';
 							   	echo '&nbsp;';
 							   //	echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
 							   //	echo '&nbsp;';
-							   	echo '<a href="deletecliente.php?id='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-danger"> <i class="fa fa-remove"></i> </button></a>';
+							   	echo '<a href="deletecliente.php?event='.$event.'&&id='.$row['id_cliente'].'"><button class="btn btn-icon waves-effect waves-light btn-danger"> <i class="fa fa-remove"></i> </button></a>';
 							   	echo '</td>';
 
                                            											echo " </tr>";
@@ -137,7 +154,7 @@
         <script>
             var resizefunc = [];
         </script>
-
+        
        <?php include('js.php'); ?>
 	</body>
 </html>

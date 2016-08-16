@@ -2,25 +2,25 @@
 	$event=$_GET['event'];
 	
 	require 'database.php';
-	$id = 0;
+	$barra = 0;
 	
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
+	if ( !empty($_GET['barra'])) {
+		$barra = $_REQUEST['barra'];
 	}
 	
 	if ( !empty($_POST)) {
 		// keep track post values
-		$id = $_POST['id'];
+		$barra = $_POST['barra'];
 		
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM Clientes  WHERE id_cliente = ?";
+		$sql = "DELETE FROM evento WHERE id_evento=?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
+		$q->execute(array($event));
 		Database::disconnect();
-		header('Location:customerevent.php?event='.$event);
-				
+		header("Location: eventos.php");		
+		
 	} 
 ?>
 
@@ -75,13 +75,11 @@
 						<!-- Page-Title -->
 						<div class="row">
 							<div class="col-sm-12">
-								<h4 class="page-title">Listado de Clientes para <?php include ('eventoheader.php');?></h4>
+								<h4 class="page-title">Eventos</h4>
 								<ol class="breadcrumb">
+                                    
                                     <li>
-                                        <a href="#">Borrar Cliente</a>
-                                    </li>
-                                    <li>
-                                        <a href="customerevent.php?event=<?php echo $event;?>">Regresar</a>
+                                        <a href="eventos.php">Regresar</a>
                                     </li>
                                 </ol>
 							</div>
@@ -90,19 +88,19 @@
                         <div class="row">
                         	<div class="col-sm-12">
                         		<div class="card-box">
-                        			<h4 class="m-t-0 header-title"><b>Eliminar Cliente</b></h4>
+                        			<h4 class="m-t-0 header-title"><b>Cencelación de Evento</b></h4>
                         			<!--<p class="text-muted m-b-30 font-13">
 										Most common form control, text-based input fields. Includes support for all HTML5 types: <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>, <code>search</code>, <code>tel</code>, and <code>color</code>.
 									</p>-->
 									<br>
                         			<div class="row">
                         				<div class="col-md-6">
-                        					<form class="form-horizontal" action="deletecliente.php?event=<?php echo $event;?>" method="post">
-	    			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
-					  <p class="alert alert-error">Desea eliminar esta Cliente, se perderá toda su información?</p>
+                        					<form class="form-horizontal" action="deleteevent.php?event=<?php echo $event;?>" method="post">
+	    			  <input type="hidden" name="barra" value="<?php echo $barra;?>"/>
+					  <p class="alert alert-error">Desea eliminar este Evento?</p>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-danger">Si</button>
-						  <a class="btn" href="customerevent.php?event=<?php echo $event;?>">No</a>
+						  <a class="btn" href="eventos.php">No</a>
 						</div>
 					</form>                        				</div>
                         				                     				

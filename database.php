@@ -5,10 +5,17 @@ class Database
 $database="mastrave_cm";
 $dbpass="@ppDT2016.";
 $dbuser="mastrave_root";*/
-	private static $dbName = 'mastravel' ; 
+	
+	/*private static $dbName = 'traveladmin' ; 
 	private static $dbHost = 'localhost' ;
 	private static $dbUsername = 'root';
-	private static $dbUserPassword = 'toor';
+	private static $dbUserPassword = 'toor';*/
+	
+	private static $dbName = 'mastrave_cm' ; 
+	private static $dbHost = 'localhost' ;
+	private static $dbUsername = 'mastrave_root';
+	private static $dbUserPassword = '@ppDT2016.';
+
 	
 	private static $cont  = null;
 	

@@ -22,13 +22,24 @@ $Password ="@ppDT2016.";
 $IdConexion = mysql_connect($Servidor, $Usuario, $Password);
 mysql_select_db($NombreBD, $IdConexion);
 
-$sql = "SELECT Clientes.id_cliente as id ,Clientes.nombre as nombre,Clientes.ap as ap,Clientes.am as am ,Clientes.email as email,Clientes.tel as tel,Clientes.cel as cel,Clientes.gen as gen,Clientes.fn as fn,Clientes.edad as edad,Clientes.calle as calle,Clientes.numero as numero,Clientes.col as col,Clientes.mun as mun,Clientes.cp as cp,Clientes.estado as estado,
-                                            datos_medicos.t_sangre as t_sangre,datos_medicos.alergico as alergico,datos_medicos.enfermedad as enfermedad,datos_medicos.enfermedad as enfermedad,datos_medicos.hospital as hospital,datos_medicos.medicamentos as medicamentos,
-                                            datos_emergencia.contactname as contactname,datos_emergencia.contactap as contactap,datos_emergencia.contactam as contactam,datos_emergencia.contacttel as contacttel,datos_emergencia.contactcel as contactcel,datos_emergencia.contactmail as contactmail,
-                                            coordinador.nombre as coord , evento.nombre as event FROM Clientes inner join datos_medicos on Clientes.id_cliente=datos_medicos.id_cliente 
-                                            inner join datos_emergencia on Clientes.id_cliente=datos_emergencia.id_cliente 
-                                            inner join coordinador on Clientes.id_coord=coordinador.id_coord
-                                            inner join evento on Clientes.id_evento=evento.id_evento";
+$sql = "SELECT Clientes.id_cliente AS id, Clientes.nombre AS nombre, Clientes.ap AS ap, Clientes.am AS am, Clientes.edad AS edad, Clientes.cel AS cel, Clientes.email AS email, Clientes.estado AS estado, datos_medicos.t_sangre AS T, datos_medicos.alergico AS al, datos_medicos.enfermedad AS enf, datos_medicos.hospital AS hos, datos_medicos.posibleemb AS pemb, datos_medicos.emb AS emb, datos_medicos.medicamentos AS med, datos_emergencia.contactname AS contacto, datos_emergencia.contactap AS contactoap, datos_emergencia.contactam AS contactoam, datos_emergencia.contacttel AS contactotel, datos_emergencia.contactcel AS contactocel, datos_emergencia.contactmail AS contactomail,
+coordinador.nombre as coord,
+evento.nombre as evento,
+barra.descr as barra,
+habitacion.descr as hab,
+extrapaq.descr as extra,
+opcionespaquete.descripcion as op
+FROM Clientes
+INNER JOIN datos_medicos ON Clientes.id_cliente = datos_medicos.id_cliente
+INNER JOIN datos_emergencia On Clientes.id_cliente=datos_emergencia.id_cliente
+INNER JOIN paquete ON Clientes.id_cliente=paquete.id_cliente
+INNER JOIN barra ON paquete.id_barra=barra.id_barra
+INNER JOIN habitacion ON paquete.id_hab=habitacion.id_hab
+INNER JOIN extrapaq ON paquete.id_extra=extrapaq.id_extra
+INNER JOIN opcionespaquete on paquete.id_opcion=opcionespaquete.id_opcion
+INNER JOIN coordinador ON Clientes.id_coord=coordinador.id_coord
+INNER JOIN evento ON Clientes.id_evento=evento.id_evento
+";
 $result=mysql_query($sql,$IdConexion);
 ?>
 Datos del cliente
@@ -39,17 +50,16 @@ Datos del cliente
 <th>Nombre</th>
 <th>Apellido Paterno</th>
 <th>Apellido Materno</th>
-<th>Email</th>
-<th>Coordinador</th>
-<th>Teléfono de Casa</th>
-<th>Celular <th>
-<th>Genero</th>
-<th>Fecha de Nacimiento</th>
 <th>Edad</th>
+<th>Celular <th>
+<th>Email</th>
+<th>Estado</th>
 <th>Tipo de Sangre</th>
 <th>¿Eres alergico a algo?</th>
 <th>¿Tienes alguna enfermedad/fractura/cirugía?</th>
 <th>¿Haz estado hospitalizado?</th>
+<th>¿Posible embarazo?</th>
+<th>¿Embarazada?</th>
 <th>Menciona medicamentos utilizados regularmente</th>
 <th>Nombre de Contacto:</th>
 <th>Apellido Paterno contacto:</th>
@@ -57,13 +67,12 @@ Datos del cliente
 <th>Teléfono de contacto:</th>
 <th>Celular de contacto:</th>
 <th>Email contacto:</th>
-<th>Calle</th>
-<th>Número</th>
-<th>Colonia</th>
-<th>Municipio</th>
-<th>Codigo Postal</th>
-<th>Estado</th>
-<th>Contrato</th>
+<th>Coordinador</th>
+<th>Evento</th>
+<th>Barras Libres</th>
+<th>Habitacion</th>
+<th>Extras</th>
+<th>Trasporte</th>
  </tr>
  </thead>
  <tbody>
@@ -98,38 +107,34 @@ printf("<tr>
 <td>&nbsp;%s</td>
 <td>&nbsp;%s</td>
 <td>&nbsp;%s</td>
-<td>&nbsp;%s</td>
-<td>&nbsp;%s</td>
 </tr>",$row['id'], 
 utf8_encode($row['nombre']),
 utf8_encode($row['ap']),
 utf8_encode($row['am']),
-$row['email'],
-$row['coord'],
-$row['tel'],
-$row['cel'],
-$row['gen'],
-$row['gen'],
-$row['fn'],
 $row['edad'],
-$row['t_sangre'],
-$row['alergico'],
-$row['enfermedad'],
-$h=($row['hospital']==0)?"No":"Si",
-$row['medicamentos'],
-$row['contactname'],
-$row['contactap'],
-$row['contactam'],
-$row['contacttel'],
-$row['contactcel'],
-$row['contactmail'],
-$row['calle'],
-$row['numero'],
-$row['col'],
-$row['mun'],
-$row['cp'],
+$row['cel'],
+$row['email'],
+$row['email'],
 $row['estado'],
-utf8_encode($row['event']));
+$row['T'],
+$row['al'],
+$row['enf'],
+$row['hos'],
+$row['pemb'],
+$row['emb'],
+$row['med'],
+$row['contacto'],
+$row['contactoap'],
+$row['contactoam'],
+$row['contactotel'],
+$row['contactocel'],
+$row['contactomail'],
+$row['coord'],
+utf8_encode($row['evento']),
+$row['barra'],
+$row['hab'],
+$row['extra'],
+$row['op']);
 }
 mysql_free_result($result);
 mysql_close($IdConexion); //Cierras la Conexión

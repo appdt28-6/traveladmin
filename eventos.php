@@ -83,6 +83,7 @@
                                                    <th>Desde</th>
                                                    <th>Detalles</th>
                                                    <th>Clientes</th>
+                                                   <th>Opciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -100,9 +101,9 @@
 											echo " <td>".utf8_encode($row['direccion'])."</td>";
 											echo " <td>".$row['estado']."</td>";
 											echo " <td>".$row['desde']."</td>";
-                                            echo " <td><a href=detailevent.php?event=".$row['id_evento'].">Detalles</></td>";
-                                            echo " <td><a href=customerevent.php?event=".$row['id_evento'].">Inscritos</></td>";
-
+                                            echo " <td><a href=detailevent.php?event=".$row['id_evento'].">Detalles</a></td>";
+                                            echo " <td><a href=customerevent.php?event=".$row['id_evento'].">Inscritos</a></td>";
+											echo " <td><a href=deleteevent.php?event=".$row['id_evento']."><i class=\"ion-close\"></i></a></td>";
 											echo " </tr>";
 											}
 											mysql_free_result($result);
